@@ -584,7 +584,10 @@ FastClick.prototype.onMouse = function(event) {
 
     // Cancel the event
     event.stopPropagation();
-    event.preventDefault();
+
+    // Fix iOS strange cancelation on custom checkboxes and radios
+    if (!this.deviceIsIOS || !(this.targetElement.tagName.toLowerCase() === 'div'))
+      event.preventDefault();
 
     return false;
   }
